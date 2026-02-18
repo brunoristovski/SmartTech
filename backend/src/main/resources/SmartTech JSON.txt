@@ -1,0 +1,50 @@
+{
+  "username": "brunzi",
+  "firstName": "Bruno",
+  "lastName": "Ristovski",
+  "email": "brunoristovski@yahoo.com",
+  "phoneNumber": "075 802 803",
+  "password": "password",
+  "confirmPassword": "password"
+}
+{
+    "name": "DESKTOP",
+    "description": "Best Rig Ever",
+    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "category": "DESKTOP",
+    "price": 99.99,
+    "stockQuantity": 100
+}
+{
+    "name": "LAPTOP",
+    "description": "Fastest Laptop",
+    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "category": "LAPTOP",
+    "price": 111.11,
+    "stockQuantity": 100
+}
+{
+    "name": "SMARTPHONE",
+    "description": "Most Intelligent Phone",
+    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "category": "SMARTPHONE",
+    "price": 222.22,
+    "stockQuantity": 100
+}
+
+{
+    "shoppingCartId":"1",
+    "productId":"1",
+    "quantity": "10"
+}
+
+{
+    "address" : "Metodija Andonov Cento 2/1-2",
+    "city":"Veles",
+    "zipcode":"1400",
+    "totalAmount":"0",
+    "username":"brunzi"
+}
+
+
+
