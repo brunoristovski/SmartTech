@@ -10,7 +10,7 @@
 {
     "name": "DESKTOP",
     "description": "Best Rig Ever",
-    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1662037592536-45692eed7ab0?q=80&w=771&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": "DESKTOP",
     "price": 99.99,
     "stockQuantity": 100
@@ -18,7 +18,7 @@
 {
     "name": "LAPTOP",
     "description": "Fastest Laptop",
-    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "imageUrl": "https://plus.unsplash.com/premium_photo-1681702156223-ea59bfbf1065?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": "LAPTOP",
     "price": 111.11,
     "stockQuantity": 100
@@ -26,7 +26,7 @@
 {
     "name": "SMARTPHONE",
     "description": "Most Intelligent Phone",
-    "imageUrl": "https://assets.gqindia.com/photos/5cdc1fd2306c1c60c16e4870/16:9/w_4528,h_2547,c_limit/GQ-India-Gaming-rig-Edited.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": "SMARTPHONE",
     "price": 222.22,
     "stockQuantity": 100
