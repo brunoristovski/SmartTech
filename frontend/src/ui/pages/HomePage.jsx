@@ -1,41 +1,21 @@
-import React, { useEffect, useState } from "react";
-import productRepository from "../../repository/productRepository.js";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./HomePage.css";
 
 const HomePage = () => {
-    const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await productRepository.findAllProducts();
-                setProducts(response.data);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
-        fetchProducts();
-    }, []);
+    const goToProducts = () => {
+        navigate("/products");
+    };
 
     return (
-        <div className="container-fluid">
-            <h1 className="text-center mb-4">Products</h1>
-            <div className="products-grid">
-                {products.map((product) => (
-                    <div className="product-card" key={product.id}>
-                        <img
-                            src={product.imageUrl || "https://via.placeholder.com/200"}
-                            alt={product.name}
-                        />
-                        <div className="card-body">
-                            <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{product.description}</p>
-                            <p><strong>Category:</strong> {product.category}</p>
-                            <p><strong>Price:</strong> {product.price} $</p>
-                            <p><strong>Quantity:</strong> {product.stockQuantity}</p>
-                            <button className="btn btn-primary w-100">Add to cart</button>
-                        </div>
-                    </div>
-                ))}
+        <div className="store">
+            <div className="store-overlay">
+                <h1>Welcome to SmartTech</h1>
+                <button className="btn btn-primary store-btn" onClick={goToProducts}>
+                    Shop Now
+                </button>
             </div>
         </div>
     );
