@@ -47,6 +47,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 shoppingCartItemDTO.setProductPrice(product.get().getPrice());
                 shoppingCartItemDTO.setProductImage(product.get().getImageUrl());
                 shoppingCartItemDTO.setProductCategory(product.get().getCategory());
+                shoppingCartItemDTO.setShoppingCartItemId(shoppingCartItem.getId());
             }
             shoppingCartItemDTOList.add(shoppingCartItemDTO);
         }

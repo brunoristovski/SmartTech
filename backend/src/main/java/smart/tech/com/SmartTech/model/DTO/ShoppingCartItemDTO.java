@@ -27,4 +27,6 @@ public class ShoppingCartItemDTO {
     private Category productCategory;
 
     private Double productPrice;
+
+    private Long shoppingCartItemId;
 }
