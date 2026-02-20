@@ -40,7 +40,16 @@ const Navbar = () => {
                     </form>
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
+                        <li className="nav-item me-3">
+                            <Link className="nav-link" to="/products">
+                                <i className="bi bi-cart-check fs-5"></i>
+                            </Link>
+                        </li>
+                        <li className="nav-item me-3">
+                            <Link className="nav-link" to="/products">
+                                <i className="bi bi-archive fs-5"></i>
+                            </Link>
+                        </li>
                         {!isLoggedIn ? (
                             <li className="nav-item">
                                 <Link className="btn btn-primary ms-3" to="/login">
