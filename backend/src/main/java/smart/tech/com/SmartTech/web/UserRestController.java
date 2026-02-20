@@ -1,7 +1,9 @@
 package smart.tech.com.SmartTech.web;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import smart.tech.com.SmartTech.model.DTO.EditUserDTO;
 import smart.tech.com.SmartTech.model.DTO.LoginResponseDTO;
 import smart.tech.com.SmartTech.model.DTO.UserDTO;
 import smart.tech.com.SmartTech.model.domain.User;
@@ -43,6 +45,14 @@ public class UserRestController {
     public ResponseEntity<User> editUser(@PathVariable String username, @RequestBody UserDTO userDTO) {
         return userService.editUser(username, userDTO)
                 .map(user -> ResponseEntity.ok().body(user))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/edit/info")
+    public ResponseEntity<EditUserDTO> getInfoForEditUser(Authentication authentication) {
+        String username = authentication.getName(); // зема од SecurityContext
+        return userService.findUserInfoForEdit(username)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

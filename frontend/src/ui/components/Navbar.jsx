@@ -65,10 +65,18 @@ const Navbar = () => {
                                     Hi {user?.sub}
                                 </button>
 
-                                <ul className="dropdown-menu dropdown-menu-end">
+                                <ul className="dropdown-menu dropdown-menu-end p-2">
+                                    <li>
+                                        <Link
+                                            className="btn btn-outline-warning w-100 mb-2"
+                                            to="/editUser"
+                                        >
+                                            Edit Profile
+                                        </Link>
+                                    </li>
                                     <li>
                                         <button
-                                            className="dropdown-item text-danger"
+                                            className="btn btn-outline-danger w-100"
                                             onClick={logout}
                                         >
                                             Logout

@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import smart.tech.com.SmartTech.JWT.util.JwtUtil;
+import smart.tech.com.SmartTech.model.DTO.EditUserDTO;
 import smart.tech.com.SmartTech.model.DTO.LoginResponseDTO;
 import smart.tech.com.SmartTech.model.DTO.UserDTO;
 import smart.tech.com.SmartTech.model.domain.*;
@@ -97,6 +98,21 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return Optional.of(user);
+    }
+
+    @Transactional
+    @Override
+    public Optional<EditUserDTO> findUserInfoForEdit(String username){
+
+        User user = findByUsername(username);
+        EditUserDTO editUserDTO = new EditUserDTO();
+        editUserDTO.setUsername(user.getUsername());
+        editUserDTO.setFirstName(user.getFirstName());
+        editUserDTO.setLastName(user.getLastName());
+        editUserDTO.setPhoneNumber(user.getPhoneNumber());
+        editUserDTO.setEmail(user.getEmail());
+
+        return Optional.of(editUserDTO);
     }
 
     @Override

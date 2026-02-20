@@ -10,6 +10,9 @@ const userRepository = {
     edit: async (username, data) => {
         return await axiosInstance.put(`/users/edit/${username}`, data);
     },
+    getInfoForEdit: async () => {
+        return await axiosInstance.get("/users/edit/info");
+    },
 };
 
 export default userRepository;

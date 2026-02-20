@@ -6,6 +6,7 @@ import HomePage from "./ui/pages/HomePage.jsx";
 import Footer from "./ui/components/Footer.jsx";
 import LoginPage from "./ui/pages/LoginPage.jsx";
 import RegisterPage from "./ui/pages/RegisterPage.jsx";
+import EditUserPage from "./ui/pages/EditUserPage.jsx";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/editUser" element={<EditUserPage />} />
                 </Routes>
             </div>
             <Footer />
