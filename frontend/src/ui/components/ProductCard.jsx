@@ -1,23 +1,87 @@
-import React from "react";
-import "./ProductCard.css";
+import React, { useState, useContext, useEffect } from "react";
+import shoppingCartRepository from "../../repository/shoppingCartRepository";
+import AuthContext from "../../contexts/authContext";
 
 const ProductCard = ({ product }) => {
-    return (
-        <div className="product-card">
-            <img
-                src={product.imageUrl || "https://via.placeholder.com/200"}
-                alt={product.name}
-            />
+    const { user } = useContext(AuthContext);
+    const [quantity, setQuantity] = useState(1);
+    const [shoppingCartId, setShoppingCartId] = useState(null);
 
+    // Земаме shoppingCartId при load на компонентата
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const res = await shoppingCartRepository.findShoppingCartById();
+                setShoppingCartId(res.data.shoppingCartId);
+            } catch (err) {
+                console.error("Error fetching shopping cart:", err);
+            }
+        };
+        if (user) fetchCart();
+    }, [user]);
+
+    const handleQuantityChange = (delta) => {
+        setQuantity(prev => Math.max(1, prev + delta)); // минимална вредност 1
+    };
+
+    const handleAddToCart = async () => {
+        if (!shoppingCartId) {
+            alert("Shopping cart not loaded yet!");
+            return;
+        }
+
+        const shoppingCartItemDTO = {
+            shoppingCartId: shoppingCartId,
+            productId: product.id,
+            quantity: quantity
+        };
+
+        try {
+            await shoppingCartRepository.addItemToShoppingCart(shoppingCartItemDTO);
+            alert(`${quantity} x ${product.name} added to cart!`);
+        } catch (err) {
+            console.error(err);
+            alert("Failed to add to cart");
+        }
+    };
+
+    return (
+        <div className="card product-card">
+            <img
+                src={product.imageUrl}
+                className="card-img-top"
+                alt={product.name}
+                style={{
+                    height: "200px",       // фиксна висина
+                    objectFit: "cover",    // слика се прилагодува и се скалира
+                    width: "100%"          // за да пополни целата ширина
+                }}
+            />
             <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
-                <p className="card-text">{product.description}</p>
-                <p><strong>Category:</strong> {product.category}</p>
-                <p><strong>Price:</strong> {product.price} $</p>
-                <p><strong>Quantity:</strong> {product.stockQuantity}</p>
+                <p className="card-text text-muted"><strong>Category: </strong> {product.category}</p>
+                <p className="card-text"><strong>Description: </strong> {product.description}</p>
+                <p className="card-text">
+                    <strong>Price: </strong>${product.price.toFixed(2)}
+                </p>
+                <p className="card-text">
+                    <strong>In Stock: </strong>{product.stockQuantity}
+                </p>
 
-                <button className="btn btn-primary w-100">
-                    Add to cart
+                <div className="d-flex align-items-center mb-2">
+                    <button className="btn btn-outline-secondary me-2" onClick={() => handleQuantityChange(-1)}>-</button>
+                    <input
+                        type="text"
+                        className="form-control text-center"
+                        value={quantity}
+                        readOnly
+                        style={{ width: "50px" }}
+                    />
+                    <button className="btn btn-outline-secondary ms-2" onClick={() => handleQuantityChange(1)}>+</button>
+                </div>
+
+                <button className="btn btn-success w-100" onClick={handleAddToCart}>
+                    Add to Cart
                 </button>
             </div>
         </div>

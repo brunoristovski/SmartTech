@@ -41,7 +41,7 @@ const Navbar = () => {
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item me-3">
-                            <Link className="nav-link" to="/products">
+                            <Link className="nav-link" to="/shoppingCart">
                                 <i className="bi bi-cart-check fs-5"></i>
                             </Link>
                         </li>

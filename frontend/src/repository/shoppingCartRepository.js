@@ -1,8 +1,8 @@
 import axiosInstance from "../axios/axios.js";
 
 const shoppingCartRepository = {
-    findShoppingCartById: async (id) => {
-        return await axiosInstance.get(`/shopping_cart/${id}`);
+    findShoppingCartById: async () => {
+        return await axiosInstance.get(`/shopping_cart`);
     },
     addItemToShoppingCart: async (data) => {
         return await axiosInstance.post("/shopping_cart/add_item", data);

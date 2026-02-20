@@ -7,6 +7,7 @@ import Footer from "./ui/components/Footer.jsx";
 import LoginPage from "./ui/pages/LoginPage.jsx";
 import RegisterPage from "./ui/pages/RegisterPage.jsx";
 import EditUserPage from "./ui/pages/EditUserPage.jsx";
+import ShoppingCartPage from "./ui/pages/ShoppingCartPage.jsx";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/editUser" element={<EditUserPage />} />
+                    <Route path="/shoppingCart" element={<ShoppingCartPage />} />
                 </Routes>
             </div>
             <Footer />

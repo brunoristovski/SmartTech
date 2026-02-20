@@ -1,12 +1,17 @@
 package smart.tech.com.SmartTech.web;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import smart.tech.com.SmartTech.model.DTO.ShoppingCartDTO;
 import smart.tech.com.SmartTech.model.DTO.ShoppingCartItemDTO;
-import smart.tech.com.SmartTech.model.domain.ShoppingCart;
 import smart.tech.com.SmartTech.model.domain.ShoppingCartItem;
+import smart.tech.com.SmartTech.model.domain.User;
 import smart.tech.com.SmartTech.services.interfaces.ShoppingCartItemService;
 import smart.tech.com.SmartTech.services.interfaces.ShoppingCartService;
+import smart.tech.com.SmartTech.services.interfaces.UserService;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @RestController
@@ -14,18 +19,21 @@ import smart.tech.com.SmartTech.services.interfaces.ShoppingCartService;
 @RequestMapping("/api/shopping_cart")
 public class ShoppingCartRestController {
 
+    private final UserService userService;
     private final ShoppingCartService shoppingCartService;
     private final ShoppingCartItemService shoppingCartItemService;
 
-    public ShoppingCartRestController(ShoppingCartService shoppingCartService, ShoppingCartItemService shoppingCartItemService) {
+    public ShoppingCartRestController(UserService userService, ShoppingCartService shoppingCartService, ShoppingCartItemService shoppingCartItemService) {
+        this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.shoppingCartItemService = shoppingCartItemService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ShoppingCart> getShoppingCart(@PathVariable Long id) {
-        return shoppingCartService.getShoppingCartById(id)
-                .map(shoppingCart -> ResponseEntity.ok().body(shoppingCart))
+    @GetMapping()
+    public ResponseEntity<ShoppingCartDTO> getShoppingCart(Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
+        return shoppingCartService.getShoppingCartById(user.getShoppingCart().getId())
+                .map(shoppingCartDTO -> ResponseEntity.ok().body(shoppingCartDTO))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
