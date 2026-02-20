@@ -82,11 +82,13 @@ const ShoppingCartPage = () => {
                                 </div>
 
                                 {/* Delete копче */}
+                                {/* Delete копче */}
                                 <button
-                                    className="btn btn-danger"
+                                    className="btn btn-danger d-flex align-items-center justify-content-center"
+                                    style={{ width: "40px", height: "40px", padding: 0 }}
                                     onClick={() => handleDeleteItem(item.shoppingCartItemId)}
                                 >
-                                    Delete
+                                    <i className="bi bi-trash-fill"></i>
                                 </button>
                             </div>
                         ))
@@ -95,12 +97,14 @@ const ShoppingCartPage = () => {
 
                 {/* Десна колона: summary */}
                 <div className="col-md-4">
-                    <h2>Shopping Cart Summary</h2>
-                    <p><strong>Total Items:</strong> {shoppingCart?.shoppingCartItemDTOList?.length ?? 0}</p>
-                    <p><strong>Total Amount:</strong> ${shoppingCart?.totalAmount?.toFixed(2) ?? 0}</p>
-                    <button className="btn btn-success w-100">
-                        Place Order
-                    </button>
+                    <div className="border p-3 rounded" style={{ borderColor: "#ccc" }}>
+                        <h2>Shopping Cart Summary</h2>
+                        <p><strong>Total Items:</strong> {shoppingCart?.shoppingCartItemDTOList?.length ?? 0}</p>
+                        <p><strong>Total Amount:</strong> ${shoppingCart?.totalAmount?.toFixed(2) ?? 0}</p>
+                        <button className="btn btn-success w-100">
+                            Place Order
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

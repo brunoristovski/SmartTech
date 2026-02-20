@@ -26,27 +26,38 @@ const Navbar = () => {
 
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item me-3">
-                            <Link className="nav-link active" to="/">Home</Link>
+                            <Link className="nav-link nav-custom" to="/">Home</Link>
                         </li>
                         <li className="nav-item me-3">
-                            <Link className="nav-link" to="/products">Products</Link>
+                            <Link className="nav-link nav-custom" to="/products">Products</Link>
                         </li>
                     </ul>
 
                     <form className="d-flex mx-auto" style={{ maxWidth: "500px", width: "100%" }}>
-                        <input className="form-control me-2" type="search"
-                               placeholder="Search for products" />
-                        <button className="btn btn-success" type="submit">Search</button>
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search for products"
+                        />
+                        <button className="btn btn-outline-success btn-search" type="submit">
+                            Search
+                        </button>
                     </form>
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item me-3">
-                            <Link className="nav-link" to="/shoppingCart">
+                            <Link
+                                className="nav-link icon-button"
+                                to="/shoppingCart"
+                            >
                                 <i className="bi bi-cart-check fs-5"></i>
                             </Link>
                         </li>
                         <li className="nav-item me-3">
-                            <Link className="nav-link" to="/products">
+                            <Link
+                                className="nav-link icon-button"
+                                to="/products"
+                            >
                                 <i className="bi bi-archive fs-5"></i>
                             </Link>
                         </li>

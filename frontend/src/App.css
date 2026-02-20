@@ -26,3 +26,57 @@ html, body, #root {
 .routes-wrapper {
   flex: 1;
 }
+
+.nav-custom {
+  background-color: white;  /* бела позадина */
+  color: black !important;  /* црни букви */
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-custom:hover {
+  background-color: black;  /* црна позадина на hover */
+  color: white !important;  /* бели букви на hover */
+}
+
+.icon-button {
+  background-color: white;
+  color: black; /* ова ќе биде бојата на иконата */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.icon-button i {
+  color: black; /* иконата почетно црна */
+}
+
+.icon-button:hover {
+  background-color: black;
+  border: 1px solid white;
+}
+
+.icon-button:hover i {
+  color: white; /* иконата станува бела на hover */
+}
+
+.btn-search {
+  border: 2px solid #198754; /* зелена линија */
+  color: #198754;            /* зелена боја на текстот */
+  background-color: transparent; /* почетно празно */
+  transition: all 0.3s ease;
+}
+
+.btn-search:hover {
+  background-color: #198754; /* полно зелено на hover */
+  color: white;              /* текстот станува бел */
+}
+
+
+
