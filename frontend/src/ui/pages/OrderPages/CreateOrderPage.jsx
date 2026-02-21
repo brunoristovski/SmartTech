@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import shoppingCartRepository from "../../repository/shoppingCartRepository";
-import orderRepository from "../../repository/orderRepository";
+import shoppingCartRepository from "../../../repository/shoppingCartRepository.js";
+import orderRepository from "../../../repository/orderRepository.js";
 
 const CreateOrderPage = () => {
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import orderRepository from "../../repository/orderRepository.js";
+import orderRepository from "../../../repository/orderRepository.js";
 
 const OrderItemsPage = () => {
 

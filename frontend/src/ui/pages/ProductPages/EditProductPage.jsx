@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import productRepository from "../../repository/productRepository";
+import productRepository from "../../../repository/productRepository.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

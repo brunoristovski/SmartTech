@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import productRepository from "../../repository/productRepository.js";
+import productRepository from "../../../repository/productRepository.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

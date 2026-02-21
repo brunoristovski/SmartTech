@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productRepository from "../../repository/productRepository.js";
+import productRepository from "../../../repository/productRepository.js";
 
 const ProductInfoPage = () => {
     const { id } = useParams();

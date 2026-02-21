@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userRepository from "../../repository/userRepository";
+import userRepository from "../../../repository/userRepository.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

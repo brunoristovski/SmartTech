@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../contexts/authContext";
-import userRepository from "../../repository/userRepository";
+import AuthContext from "../../../contexts/authContext.js";
+import userRepository from "../../../repository/userRepository.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

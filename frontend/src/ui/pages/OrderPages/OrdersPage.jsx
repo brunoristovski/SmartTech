@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import orderRepository from "../../repository/orderRepository.js";
-import axiosInstance from "../../axios/axios.js";
+import orderRepository from "../../../repository/orderRepository.js";
+import axiosInstance from "../../../axios/axios.js";
 
 const OrdersPage = () => {
 

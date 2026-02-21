@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import productRepository from "../../repository/productRepository.js";
-import ProductCard from "../components/ProductCard.jsx";
-import AuthContext from "../../contexts/authContext";
-import "../../App.css"
+import productRepository from "../../../repository/productRepository.js";
+import ProductCard from "../../components/ProductCard.jsx";
+import AuthContext from "../../../contexts/authContext.js";
+import "../../../App.css"
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
