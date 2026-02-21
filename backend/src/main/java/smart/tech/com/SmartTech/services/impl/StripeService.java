@@ -6,8 +6,8 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import smart.tech.com.SmartTech.model.DTO.ProductRequestDTO;
 import smart.tech.com.SmartTech.model.DTO.StripeResponseDTO;
+import smart.tech.com.SmartTech.model.domain.Order;
 
 @Service
 public class StripeService {
@@ -19,45 +19,49 @@ public class StripeService {
     //Stripe request -> productName,amount,currency,quantity
     //Stripe response -> status,message,sessionId,sessionUrl
 
-    public StripeResponseDTO checkout(ProductRequestDTO productRequestDTO) {
-
+    public StripeResponseDTO checkoutOrder(Order order) {
         Stripe.apiKey = secretKey;
 
-        SessionCreateParams.LineItem.PriceData.ProductData productData =SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                .setName(productRequestDTO.getName()).build();
+        // Единствен line item со totalAmount од order
+        SessionCreateParams.LineItem.PriceData.ProductData productData =
+                SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                        .setName("Order #" + order.getId())
+                        .build();
 
-        SessionCreateParams.LineItem.PriceData priceData = SessionCreateParams.LineItem.PriceData.builder()
-                .setUnitAmount(productRequestDTO.getAmount())
-                .setCurrency(productRequestDTO.getCurrency()==null?"USD":productRequestDTO.getCurrency())
-                .setProductData(productData)
-                .build();
+        SessionCreateParams.LineItem.PriceData priceData =
+                SessionCreateParams.LineItem.PriceData.builder()
+                        .setUnitAmount((long)(order.getTotalAmount() * 100)) // cents
+                        .setCurrency("usd")
+                        .setProductData(productData)
+                        .build();
 
         SessionCreateParams.LineItem lineItem = SessionCreateParams.LineItem.builder()
-                .setQuantity(productRequestDTO.getQuantity())
+                .setQuantity(1L)
                 .setPriceData(priceData)
                 .build();
 
-        SessionCreateParams params =
-                SessionCreateParams.builder()
-                        .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("http://localhost:8080/api/products")
-                        .setCancelUrl("http://localhost:8080/api/orders")
-                        .addLineItem(lineItem)
-                        .build();
-
-        Session session = null;
-        try {
-            session = Session.create(params);
-        } catch (StripeException e) {
-            //log the error
-        }
-
-        return StripeResponseDTO.builder()
-                .status("SUCCESS")
-                .message("Payment session created ")
-                .sessionId(session.getId())
-                .sessionURL(session.getUrl())
+        SessionCreateParams params = SessionCreateParams.builder()
+                .setMode(SessionCreateParams.Mode.PAYMENT)
+                .setSuccessUrl("http://localhost:3000/orders")
+                .setCancelUrl("http://localhost:3000/orders")
+                .setClientReferenceId(order.getId().toString()) // <-- ovde go dodavame orderId
+                .addLineItem(lineItem)
                 .build();
 
+        try {
+            Session session = Session.create(params);
+
+            return StripeResponseDTO.builder()
+                    .status("SUCCESS")
+                    .message("Payment session created")
+                    .sessionId(session.getId())
+                    .sessionURL(session.getUrl())
+                    .build();
+        } catch (StripeException e) {
+            return StripeResponseDTO.builder()
+                    .status("FAILED")
+                    .message(e.getMessage())
+                    .build();
+        }
     }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import orderRepository from "../../repository/orderRepository.js";
+import axiosInstance from "../../axios/axios.js";
 
 const OrdersPage = () => {
 
@@ -33,8 +34,18 @@ const OrdersPage = () => {
         navigate(`/orders/${id}`);
     };
 
-    const handlePay = (id) => {
-        alert("Stripe payment will be implemented later.");
+
+    const handlePay = async (orderId) => {
+        try {
+            const response = await axiosInstance.post(`/payment/checkout/${orderId}`);
+            const sessionURL = response.data.sessionURL;
+
+            if (sessionURL) {
+                window.location.href = sessionURL; // korisnik otide na Stripe
+            }
+        } catch (error) {
+            console.error("Error during Stripe checkout:", error);
+        }
     };
 
     return (
