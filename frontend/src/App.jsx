@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./ui/components/Navbar.jsx";
 import ProductsPage from "./ui/pages/ProductsPage.jsx";
 import HomePage from "./ui/pages/HomePage.jsx";
@@ -19,9 +22,10 @@ function App() {
     return (
         <BrowserRouter>
             <Navbar />
+
             <div className="routes-wrapper">
                 <Routes>
-                    <Route path="/" element={<HomePage/>} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/create-product" element={<CreateProductPage />} />
                     <Route path="/products/:id" element={<ProductInfoPage />} />
@@ -35,6 +39,19 @@ function App() {
                     <Route path="/create-order" element={<CreateOrderPage />} />
                 </Routes>
             </div>
+
+            {/* 🔥 Toast Notification Container */}
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                pauseOnHover
+                draggable
+                theme="colored"
+            />
+
             <Footer />
         </BrowserRouter>
     );

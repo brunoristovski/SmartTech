@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/authContext";
 import userRepository from "../../repository/userRepository";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
 
@@ -13,8 +15,6 @@ const LoginPage = () => {
         password: ""
     });
 
-    const [error, setError] = useState("");
-
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -24,22 +24,21 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
 
         try {
             const response = await userRepository.login(formData);
             login(response.data.token);
+            toast.success("Login successful!");
             navigate("/");
         } catch (err) {
-            setError(err.response?.data?.message || "Invalid credentials");
+            console.error(err);
+            toast.error(err.response?.data?.message || "Invalid credentials");
         }
     };
 
     return (
         <div className="container mt-5" style={{ maxWidth: "500px" }}>
             <h2 className="mb-4">Login</h2>
-
-            {error && <div className="alert alert-danger">{error}</div>}
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">

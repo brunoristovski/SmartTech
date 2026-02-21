@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../contexts/authContext";
 import userRepository from "../../repository/userRepository";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditUserPage = () => {
     const { user } = useContext(AuthContext);
@@ -20,6 +22,7 @@ const EditUserPage = () => {
                 setEditData(res.data);
             } catch (err) {
                 console.error("Error fetching user info:", err);
+                toast.error("Failed to load user information");
             } finally {
                 setLoading(false);
             }
@@ -36,10 +39,10 @@ const EditUserPage = () => {
         e.preventDefault();
         try {
             await userRepository.edit(editData.username, editData);
-            alert("Profile updated successfully!");
+            toast.success("Profile updated successfully!");
         } catch (err) {
             console.error(err);
-            alert("Error updating profile");
+            toast.error("Error updating profile");
         }
     };
 

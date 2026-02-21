@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import productRepository from "../../repository/productRepository";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditProductPage = () => {
     const { id } = useParams();
@@ -30,6 +32,7 @@ const EditProductPage = () => {
                 setCategories(categoriesRes.data);
             } catch (err) {
                 console.error("Error loading data", err);
+                toast.error("Failed to load product data or categories");
             }
         };
 
@@ -47,11 +50,11 @@ const EditProductPage = () => {
         e.preventDefault();
         try {
             await productRepository.updateProduct(id, product);
-            alert("Product updated successfully!");
+            toast.success("Product updated successfully!");
             navigate("/products");
         } catch (err) {
             console.error("Update failed", err);
-            alert("Failed to update product");
+            toast.error("Failed to update product");
         }
     };
 

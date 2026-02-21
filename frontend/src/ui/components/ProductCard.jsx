@@ -2,7 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import shoppingCartRepository from "../../repository/shoppingCartRepository";
 import productRepository from "../../repository/productRepository";
 import AuthContext from "../../contexts/authContext";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductCard = ({ product }) => {
     const { user } = useContext(AuthContext);
@@ -16,6 +18,7 @@ const ProductCard = ({ product }) => {
                 setShoppingCartId(res.data.shoppingCartId);
             } catch (err) {
                 console.error("Error fetching shopping cart:", err);
+                toast.error("Failed to load shopping cart");
             }
         };
         if (user) fetchCart();
@@ -31,7 +34,7 @@ const ProductCard = ({ product }) => {
 
     const handleAddToCart = async () => {
         if (!shoppingCartId) {
-            alert("Shopping cart not loaded yet!");
+            toast.error("Shopping cart not loaded yet!");
             return;
         }
 
@@ -43,10 +46,10 @@ const ProductCard = ({ product }) => {
 
         try {
             await shoppingCartRepository.addItemToShoppingCart(shoppingCartItemDTO);
-            alert(`${quantity} x ${product.name} added to cart!`);
+            toast.success(`${quantity} x ${product.name} added to cart!`);
         } catch (err) {
             console.error(err);
-            alert("Failed to add to cart");
+            toast.error("Failed to add to cart");
         }
     };
 
@@ -56,14 +59,13 @@ const ProductCard = ({ product }) => {
 
         try {
             await productRepository.deleteProductById(product.id);
-            alert("Product deleted successfully!");
-            window.location.reload(); // наједноставно решение
+            toast.success("Product deleted successfully!");
+            window.location.reload(); // наједноставно решение за refresh
         } catch (err) {
             console.error("Delete failed", err);
-            alert("Failed to delete product");
+            toast.error("Failed to delete product");
         }
     };
-
 
     return (
         <div className="card product-card">
@@ -84,7 +86,6 @@ const ProductCard = ({ product }) => {
                 <p className="card-text"><strong>Price: </strong>${product.price.toFixed(2)}</p>
                 <p className="card-text"><strong>In Stock: </strong>{product.stockQuantity}</p>
 
-                {/* Quantity selector се прикажува само ако е логиран корисник */}
                 {user && (
                     <>
                         <div className="d-flex align-items-center mb-2">
@@ -104,6 +105,7 @@ const ProductCard = ({ product }) => {
                         </button>
                     </>
                 )}
+
                 <div className="mt-2">
                     <Link
                         to={`/products/${product.id}`}
@@ -112,6 +114,7 @@ const ProductCard = ({ product }) => {
                         Info
                     </Link>
                 </div>
+
                 {isAdmin() && (
                     <div className="mt-2">
                         <Link
@@ -122,6 +125,7 @@ const ProductCard = ({ product }) => {
                         </Link>
                     </div>
                 )}
+
                 {isAdmin() && (
                     <div className="mt-2">
                         <button

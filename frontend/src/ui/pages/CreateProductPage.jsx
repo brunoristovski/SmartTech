@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import productRepository from "../../repository/productRepository.js";
-import axiosInstance from "../../axios/axios.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateProductPage = () => {
     const navigate = useNavigate();
@@ -16,16 +17,16 @@ const CreateProductPage = () => {
     });
 
     const [categories, setCategories] = useState([]);
-    const [error, setError] = useState("");
 
     // fetch categories from backend
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await productRepository.getAllCategories(); // <-- користи repository
+                const res = await productRepository.getAllCategories();
                 setCategories(res.data);
             } catch (err) {
                 console.error("Failed to fetch categories:", err);
+                toast.error("Failed to load categories");
             }
         };
         fetchCategories();
@@ -44,7 +45,7 @@ const CreateProductPage = () => {
 
         if (!productData.name || !productData.description || !productData.imageUrl ||
             !productData.category || !productData.price || !productData.stockQuantity) {
-            setError("All fields are required!");
+            toast.error("All fields are required!");
             return;
         }
 
@@ -56,19 +57,17 @@ const CreateProductPage = () => {
 
         try {
             await productRepository.createProduct(payload);
-            alert("Product created successfully!");
+            toast.success("Product created successfully!");
             navigate("/products");
         } catch (err) {
             console.error(err);
-            setError("Failed to create product. Please try again.");
+            toast.error("Failed to create product. Please try again.");
         }
     };
 
     return (
         <div className="container mt-4" style={{ maxWidth: "600px" }}>
             <h2 className="mb-4 text-center">Create Product</h2>
-
-            {error && <div className="alert alert-danger">{error}</div>}
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userRepository from "../../repository/userRepository";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = () => {
 
@@ -16,8 +18,6 @@ const RegisterPage = () => {
         confirmPassword: ""
     });
 
-    const [error, setError] = useState("");
-
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -27,26 +27,25 @@ const RegisterPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
 
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match");
+            toast.error("Passwords do not match");
             return;
         }
 
         try {
             await userRepository.register(formData);
+            toast.success("Registration successful! Please login.");
             navigate("/login");
         } catch (err) {
-            setError(err.response?.data?.message || "Registration failed");
+            console.error(err);
+            toast.error(err.response?.data?.message || "Registration failed");
         }
     };
 
     return (
         <div className="container mt-5" style={{ maxWidth: "600px" }}>
             <h2 className="mb-4">Register</h2>
-
-            {error && <div className="alert alert-danger">{error}</div>}
 
             <form onSubmit={handleSubmit}>
                 <div className="row">
