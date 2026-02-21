@@ -63,7 +63,7 @@ public class WebSecurityConfig {
 
                         .requestMatchers("/api/users/edit/**",
                                 "/api/shopping_cart/**",
-                                "/api/payment/checkout",
+                                "/api/payment/checkout/**",
                                 "/api/orders/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().hasRole("ADMIN")
                 )
