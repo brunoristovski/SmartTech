@@ -45,22 +45,28 @@ const Navbar = () => {
                     </form>
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item me-3">
-                            <Link
-                                className="nav-link icon-button"
-                                to="/shoppingCart"
-                            >
-                                <i className="bi bi-cart-check fs-5"></i>
-                            </Link>
-                        </li>
-                        <li className="nav-item me-3">
-                            <Link
-                                className="nav-link icon-button"
-                                to="/orders"
-                            >
-                                <i className="bi bi-archive fs-5"></i>
-                            </Link>
-                        </li>
+                        {/* Покажи само ако е логиран корисник */}
+                        {isLoggedIn && (
+                            <>
+                                <li className="nav-item me-3">
+                                    <Link
+                                        className="nav-link icon-button"
+                                        to="/shoppingCart"
+                                    >
+                                        <i className="bi bi-cart-check fs-5"></i>
+                                    </Link>
+                                </li>
+                                <li className="nav-item me-3">
+                                    <Link
+                                        className="nav-link icon-button"
+                                        to="/orders"
+                                    >
+                                        <i className="bi bi-archive fs-5"></i>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+
                         {!isLoggedIn ? (
                             <li className="nav-item">
                                 <Link className="btn btn-primary ms-3" to="/login">

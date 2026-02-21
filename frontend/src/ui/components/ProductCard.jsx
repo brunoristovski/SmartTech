@@ -7,7 +7,6 @@ const ProductCard = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const [shoppingCartId, setShoppingCartId] = useState(null);
 
-    // Земаме shoppingCartId при load на компонентата
     useEffect(() => {
         const fetchCart = async () => {
             try {
@@ -21,7 +20,7 @@ const ProductCard = ({ product }) => {
     }, [user]);
 
     const handleQuantityChange = (delta) => {
-        setQuantity(prev => Math.max(1, prev + delta)); // минимална вредност 1
+        setQuantity(prev => Math.max(1, prev + delta));
     };
 
     const handleAddToCart = async () => {
@@ -52,37 +51,38 @@ const ProductCard = ({ product }) => {
                 className="card-img-top"
                 alt={product.name}
                 style={{
-                    height: "200px",       // фиксна висина
-                    objectFit: "cover",    // слика се прилагодува и се скалира
-                    width: "100%"          // за да пополни целата ширина
+                    height: "200px",
+                    objectFit: "cover",
+                    width: "100%"
                 }}
             />
             <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
-                <p className="card-text text-muted"><strong>Category: </strong> {product.category}</p>
-                <p className="card-text"><strong>Description: </strong> {product.description}</p>
-                <p className="card-text">
-                    <strong>Price: </strong>${product.price.toFixed(2)}
-                </p>
-                <p className="card-text">
-                    <strong>In Stock: </strong>{product.stockQuantity}
-                </p>
+                <p className="card-text text-muted"><strong>Category: </strong>{product.category}</p>
+                <p className="card-text"><strong>Description: </strong>{product.description}</p>
+                <p className="card-text"><strong>Price: </strong>${product.price.toFixed(2)}</p>
+                <p className="card-text"><strong>In Stock: </strong>{product.stockQuantity}</p>
 
-                <div className="d-flex align-items-center mb-2">
-                    <button className="btn btn-outline-secondary me-2" onClick={() => handleQuantityChange(-1)}>-</button>
-                    <input
-                        type="text"
-                        className="form-control text-center"
-                        value={quantity}
-                        readOnly
-                        style={{ width: "50px" }}
-                    />
-                    <button className="btn btn-outline-secondary ms-2" onClick={() => handleQuantityChange(1)}>+</button>
-                </div>
+                {/* Quantity selector се прикажува само ако е логиран корисник */}
+                {user && (
+                    <>
+                        <div className="d-flex align-items-center mb-2">
+                            <button className="btn btn-outline-secondary me-2" onClick={() => handleQuantityChange(-1)}>-</button>
+                            <input
+                                type="text"
+                                className="form-control text-center"
+                                value={quantity}
+                                readOnly
+                                style={{ width: "50px" }}
+                            />
+                            <button className="btn btn-outline-secondary ms-2" onClick={() => handleQuantityChange(1)}>+</button>
+                        </div>
 
-                <button className="btn btn-success w-100" onClick={handleAddToCart}>
-                    Add to Cart
-                </button>
+                        <button className="btn btn-success w-100" onClick={handleAddToCart}>
+                            Add to Cart
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
