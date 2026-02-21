@@ -58,7 +58,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/users/register",
                                 "/api/users/login",
                                 "/api/products",
-                                "/api/products/{id}").permitAll()
+                                "/api/products/{id}",
+                                "/api/products/searchBy/categories").permitAll()
 
                         .requestMatchers("/api/users/edit/**",
                                 "/api/shopping_cart/**",

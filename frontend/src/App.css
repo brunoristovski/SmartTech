@@ -161,3 +161,41 @@ html, body, #root {
   color: white;
   border-color: #198754;
 }
+
+/* RESPONSIVE FIXES */
+@media (max-width: 992px) {
+  .d-flex {
+    flex-direction: column; /* левиот панел под продуктите */
+  }
+
+  .categories-panel {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 10px;
+  }
+
+  .text-center.mb-4 h1 {
+    font-size: 1.8rem; /* малку помал текст за мали екрани */
+  }
+}
+
+@media (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* само една колона на мали телефони */
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .categories-panel h5 {
+    font-size: 1rem;
+  }
+
+  .categories-panel button {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+}

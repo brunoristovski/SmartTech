@@ -78,4 +78,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Category> getAllCategories() {
         return List.of(Category.values());
     }
+
+    @Transactional
+    @Override
+    public List<Product> getAllProductsByCategory(Category category) {
+        return productRepository.findProductByCategory(category);
+    }
 }

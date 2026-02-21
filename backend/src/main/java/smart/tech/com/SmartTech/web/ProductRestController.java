@@ -62,4 +62,20 @@ public class ProductRestController {
             return ResponseEntity.ok(categories); // 200 OK со листата
         }
     }
+
+    @GetMapping("/searchBy/categories")
+    public ResponseEntity<List<Product>> getAllProductsByCategory(@RequestParam String category) {
+        try {
+            // Пробај да конвертираш во enum, ако не успее, врати празна листа
+            Category categoryEnum = Category.valueOf(category.toUpperCase());
+            List<Product> products = productService.getAllProductsByCategory(categoryEnum);
+
+            // Врати празна листа наместо 404 ако нема продукти
+            return ResponseEntity.ok(products);
+
+        } catch (IllegalArgumentException e) {
+            // Ако category не постои во enum
+            return ResponseEntity.ok(List.of());
+        }
+    }
 }
