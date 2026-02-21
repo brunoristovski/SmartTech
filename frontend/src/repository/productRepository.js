@@ -18,7 +18,12 @@ const productRepository = {
     },
     getAllCategories: () => {
         return axiosInstance.get(`/products/categories`);
-    }
+    },
+    getProductsByCategory: (category) => {
+        return axiosInstance.get(`/products/searchBy/categories`, {
+            params: { category: category }
+        });
+    },
 
 };
 

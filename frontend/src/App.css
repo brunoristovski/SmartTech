@@ -133,3 +133,31 @@ html, body, #root {
   color: white !important;
   border-color: #dc3545 !important;
 }
+
+/* CATEGORIES PANEL */
+.categories-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.categories-panel h5 {
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.categories-panel button {
+  transition: all 0.3s ease;
+}
+
+.categories-panel button:hover {
+  background-color: #198754; /* зелена како твоите btn-green-outline */
+  color: white;
+  border-color: #198754;
+}
