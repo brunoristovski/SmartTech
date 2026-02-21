@@ -13,6 +13,7 @@ import OrdersPage from "./ui/pages/OrdersPage.jsx";
 import CreateOrderPage from "./ui/pages/CreateOrderPage.jsx";
 import CreateProductPage from "./ui/pages/CreateProductPage.jsx";
 import ProductInfoPage from "./ui/pages/ProductInfoPage.jsx";
+import EditProductPage from "./ui/pages/EditProductPage.jsx";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/products" element={<ProductsPage />} />
                     <Route path="/create-product" element={<CreateProductPage />} />
                     <Route path="/products/:id" element={<ProductInfoPage />} />
+                    <Route path="/products/edit/:id" element={<EditProductPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/editUser" element={<EditUserPage />} />

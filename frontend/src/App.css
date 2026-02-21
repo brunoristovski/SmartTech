@@ -113,3 +113,23 @@ html, body, #root {
   border-color: #0dcaf0 !important;
 }
 
+.btn-edit-custom {
+  transition: all 0.3s ease;
+}
+
+.btn-edit-custom:hover {
+  background-color: #ffc107 !important; /* Bootstrap warning yellow */
+  color: black !important;
+  border-color: #ffc107 !important;
+}
+
+/* DELETE BUTTON */
+.btn-delete-custom {
+  transition: all 0.3s ease;
+}
+
+.btn-delete-custom:hover {
+  background-color: #dc3545 !important; /* Bootstrap danger red */
+  color: white !important;
+  border-color: #dc3545 !important;
+}

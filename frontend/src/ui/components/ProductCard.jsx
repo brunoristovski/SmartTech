@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import shoppingCartRepository from "../../repository/shoppingCartRepository";
+import productRepository from "../../repository/productRepository";
 import AuthContext from "../../contexts/authContext";
 import {Link} from "react-router-dom";
 
@@ -19,6 +20,10 @@ const ProductCard = ({ product }) => {
         };
         if (user) fetchCart();
     }, [user]);
+
+    const isAdmin = () => {
+        return user?.roles?.includes("ROLE_ADMIN");
+    };
 
     const handleQuantityChange = (delta) => {
         setQuantity(prev => Math.max(1, prev + delta));
@@ -44,6 +49,21 @@ const ProductCard = ({ product }) => {
             alert("Failed to add to cart");
         }
     };
+
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+        if (!confirmDelete) return;
+
+        try {
+            await productRepository.deleteProductById(product.id);
+            alert("Product deleted successfully!");
+            window.location.reload(); // наједноставно решение
+        } catch (err) {
+            console.error("Delete failed", err);
+            alert("Failed to delete product");
+        }
+    };
+
 
     return (
         <div className="card product-card">
@@ -92,6 +112,26 @@ const ProductCard = ({ product }) => {
                         Info
                     </Link>
                 </div>
+                {isAdmin() && (
+                    <div className="mt-2">
+                        <Link
+                            to={`/products/edit/${product.id}`}
+                            className="btn btn-outline-warning w-100 btn-edit-custom"
+                        >
+                            Edit
+                        </Link>
+                    </div>
+                )}
+                {isAdmin() && (
+                    <div className="mt-2">
+                        <button
+                            onClick={handleDelete}
+                            className="btn btn-outline-danger w-100 btn-delete-custom"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
