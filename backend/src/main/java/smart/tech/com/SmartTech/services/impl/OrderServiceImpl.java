@@ -54,12 +54,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Optional<Order> createOrder(OrderDTO orderDTO) {
+    public Optional<Order> createOrder(OrderDTO orderDTO, String usernameFromAuth) {
 
         List<OrderItem> orderItems = new ArrayList<>();
-        User user = userService.findByUsername(orderDTO.getUsername());
+        User user = userService.findByUsername(usernameFromAuth);
 
-        Order order = new Order(OrderStatus.CREATED, orderDTO.getAddress(), orderDTO.getCity(), orderDTO.getZipcode(), LocalDateTime.now(), 0.0, user, orderItems);
+        Order order = new Order(OrderStatus.CREATED, orderDTO.getAddress(), orderDTO.getCity(),
+                orderDTO.getZipcode(), LocalDateTime.now(), 0.0, user, orderItems);
 
         orderRepository.save(order);
 

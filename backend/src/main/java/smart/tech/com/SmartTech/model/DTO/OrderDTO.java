@@ -18,6 +18,5 @@ public class OrderDTO {
     private String zipcode;
     @NotNull
     private Double totalAmount;
-    @NotNull
-    private String username;
+
 }

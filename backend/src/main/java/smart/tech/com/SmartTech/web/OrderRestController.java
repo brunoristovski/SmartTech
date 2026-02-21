@@ -26,8 +26,10 @@ public class OrderRestController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
-        return orderService.createOrder(orderDTO)
+    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO, Authentication authentication) {
+
+        String username = authentication.getName(); // земи username од auth
+        return orderService.createOrder(orderDTO, username)
                 .map(order -> ResponseEntity.ok().body(order))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
