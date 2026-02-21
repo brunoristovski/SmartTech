@@ -56,7 +56,7 @@ const Navbar = () => {
                         <li className="nav-item me-3">
                             <Link
                                 className="nav-link icon-button"
-                                to="/products"
+                                to="/orders"
                             >
                                 <i className="bi bi-archive fs-5"></i>
                             </Link>

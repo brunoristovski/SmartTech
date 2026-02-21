@@ -8,6 +8,8 @@ import LoginPage from "./ui/pages/LoginPage.jsx";
 import RegisterPage from "./ui/pages/RegisterPage.jsx";
 import EditUserPage from "./ui/pages/EditUserPage.jsx";
 import ShoppingCartPage from "./ui/pages/ShoppingCartPage.jsx";
+import OrderItemsPage from "./ui/pages/OrderItemsPage.jsx";
+import OrdersPage from "./ui/pages/OrdersPage.jsx";
 
 function App() {
     return (
@@ -21,6 +23,8 @@ function App() {
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/editUser" element={<EditUserPage />} />
                     <Route path="/shoppingCart" element={<ShoppingCartPage />} />
+                    <Route path="/orders" element={<OrdersPage />} />
+                    <Route path="/orders/:id" element={<OrderItemsPage />} />
                 </Routes>
             </div>
             <Footer />

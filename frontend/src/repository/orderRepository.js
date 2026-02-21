@@ -12,6 +12,14 @@ const orderRepository = {
 
     cancelOrder: async (id) => {
         return await axiosInstance.delete(`/orders/cancel/${id}`);
+    },
+
+    getOrdersForCurrentUser: async () => {
+        return await axiosInstance.get("/orders");
+    },
+
+    getOrderByIdForCurrentUser: async (id) => {
+        return await axiosInstance.get(`/orders/${id}`);
     }
 };
 

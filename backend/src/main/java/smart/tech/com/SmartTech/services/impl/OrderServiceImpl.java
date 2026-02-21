@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import smart.tech.com.SmartTech.model.DTO.OrderDTO;
 import smart.tech.com.SmartTech.model.DTO.OrderItemDTO;
+import smart.tech.com.SmartTech.model.DTO.OrderItemResponseDTO;
+import smart.tech.com.SmartTech.model.DTO.OrderResponseDTO;
 import smart.tech.com.SmartTech.model.domain.*;
 import smart.tech.com.SmartTech.model.enumerations.OrderStatus;
 import smart.tech.com.SmartTech.model.exceptions.OrderNotFoundException;
@@ -118,4 +120,72 @@ public class OrderServiceImpl implements OrderService {
 
         return Optional.of(order);
     }
+
+    @Override
+    public List<OrderResponseDTO> findOrdersForCurrentUser(String username) {
+
+        User user = userService.findByUsername(username);
+        List<Order> orders = orderRepository.findByUser(user);
+
+        List<OrderResponseDTO> orderResponseDTOs = new ArrayList<>();
+
+        for (Order order : orders) {
+
+            OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+
+            orderResponseDTO.setId(order.getId());
+            orderResponseDTO.setAddress(order.getAddress());
+            orderResponseDTO.setCity(order.getCity());
+            orderResponseDTO.setZipcode(order.getZipcode());
+            orderResponseDTO.setTotalAmount(order.getTotalAmount());
+            orderResponseDTO.setStatus(order.getStatus());
+            orderResponseDTO.setOrderDate(order.getOrderDate());
+
+            orderResponseDTOs.add(orderResponseDTO);
+        }
+
+        return orderResponseDTOs;
+    }
+
+    @Override
+    public List<OrderItemResponseDTO> findOrderByIdForCurrentUser(Long orderId, String username) {
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(OrderNotFoundException::new);
+
+        if (!order.getUser().getUsername().equals(username)) {
+            throw new OrderNotFoundException();
+        }
+
+        OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+
+        orderResponseDTO.setId(order.getId());
+        orderResponseDTO.setAddress(order.getAddress());
+        orderResponseDTO.setCity(order.getCity());
+        orderResponseDTO.setZipcode(order.getZipcode());
+        orderResponseDTO.setTotalAmount(order.getTotalAmount());
+        orderResponseDTO.setStatus(order.getStatus());
+        orderResponseDTO.setOrderDate(order.getOrderDate());
+
+        List<OrderItemResponseDTO> itemDTOs = new ArrayList<>();
+
+        for (OrderItem orderItem : order.getOrderItems()) {
+
+            OrderItemResponseDTO itemDTO = new OrderItemResponseDTO();
+
+            itemDTO.setId(orderItem.getId());
+            itemDTO.setProductName(orderItem.getProduct().getName());
+            itemDTO.setProductDescription(orderItem.getProduct().getDescription());
+            itemDTO.setProductImage(orderItem.getProduct().getImageUrl());
+            itemDTO.setProductCategory(orderItem.getProduct().getCategory());
+            itemDTO.setProductPrice(orderItem.getProduct().getPrice());
+            itemDTO.setQuantity(orderItem.getQuantity());
+            itemDTO.setSubtotal(orderItem.getPriceOfProductAndQuantity());
+
+            itemDTOs.add(itemDTO);
+        }
+
+        return itemDTOs;
+    }
+
 }

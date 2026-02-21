@@ -1,6 +1,8 @@
 package smart.tech.com.SmartTech.services.interfaces;
 
 import smart.tech.com.SmartTech.model.DTO.OrderDTO;
+import smart.tech.com.SmartTech.model.DTO.OrderItemResponseDTO;
+import smart.tech.com.SmartTech.model.DTO.OrderResponseDTO;
 import smart.tech.com.SmartTech.model.domain.Order;
 import smart.tech.com.SmartTech.model.enumerations.OrderStatus;
 
@@ -19,4 +21,8 @@ public interface OrderService {
     Optional<Order> submitOrder(Long orderId);
 
     Optional<Order> cancelOrder(Long orderId);
+
+    List<OrderResponseDTO> findOrdersForCurrentUser(String username);
+
+    List<OrderItemResponseDTO> findOrderByIdForCurrentUser(Long orderId, String username);
 }
