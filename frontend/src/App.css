@@ -90,3 +90,26 @@ html, body, #root {
   color: white !important;              /* текстот станува бел */
 }
 
+
+/* CART BUTTON */
+.btn-cart-custom {
+  transition: all 0.3s ease;
+}
+
+.btn-cart-custom:hover {
+  background-color: #198754 !important; /* Bootstrap success green */
+  color: white !important;
+  border-color: #198754 !important;
+}
+
+/* INFO BUTTON */
+.btn-info-custom {
+  transition: all 0.3s ease;
+}
+
+.btn-info-custom:hover {
+  background-color: #0dcaf0 !important; /* Bootstrap info blue */
+  color: white !important;
+  border-color: #0dcaf0 !important;
+}
+

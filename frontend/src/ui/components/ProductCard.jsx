@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import shoppingCartRepository from "../../repository/shoppingCartRepository";
 import AuthContext from "../../contexts/authContext";
+import {Link} from "react-router-dom";
 
 const ProductCard = ({ product }) => {
     const { user } = useContext(AuthContext);
@@ -78,11 +79,19 @@ const ProductCard = ({ product }) => {
                             <button className="btn btn-outline-secondary ms-2" onClick={() => handleQuantityChange(1)}>+</button>
                         </div>
 
-                        <button className="btn btn-success w-100" onClick={handleAddToCart}>
+                        <button className="btn btn-outline-success w-100 btn-cart-custom" onClick={handleAddToCart}>
                             Add to Cart
                         </button>
                     </>
                 )}
+                <div className="mt-2">
+                    <Link
+                        to={`/products/${product.id}`}
+                        className="btn btn-outline-info w-100 btn-info-custom"
+                    >
+                        Info
+                    </Link>
+                </div>
             </div>
         </div>
     );
