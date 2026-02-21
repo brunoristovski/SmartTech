@@ -17,6 +17,7 @@ import CreateOrderPage from "./ui/pages/OrderPages/CreateOrderPage.jsx";
 import CreateProductPage from "./ui/pages/ProductPages/CreateProductPage.jsx";
 import ProductInfoPage from "./ui/pages/ProductPages/ProductInfoPage.jsx";
 import EditProductPage from "./ui/pages/ProductPages/EditProductPage.jsx";
+import SearchProductPage from "./ui/pages/ProductPages/SearchProductPage.jsx";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/create-product" element={<CreateProductPage />} />
                     <Route path="/products/:id" element={<ProductInfoPage />} />
                     <Route path="/products/edit/:id" element={<EditProductPage />} />
+                    <Route path="/search" element={<SearchProductPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/editUser" element={<EditUserPage />} />
