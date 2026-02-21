@@ -10,6 +10,7 @@ import EditUserPage from "./ui/pages/EditUserPage.jsx";
 import ShoppingCartPage from "./ui/pages/ShoppingCartPage.jsx";
 import OrderItemsPage from "./ui/pages/OrderItemsPage.jsx";
 import OrdersPage from "./ui/pages/OrdersPage.jsx";
+import CreateOrderPage from "./ui/pages/CreateOrderPage.jsx";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/shoppingCart" element={<ShoppingCartPage />} />
                     <Route path="/orders" element={<OrdersPage />} />
                     <Route path="/orders/:id" element={<OrderItemsPage />} />
+                    <Route path="/create-order" element={<CreateOrderPage />} />
                 </Routes>
             </div>
             <Footer />

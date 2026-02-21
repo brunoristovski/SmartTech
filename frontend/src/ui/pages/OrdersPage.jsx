@@ -46,12 +46,12 @@ const OrdersPage = () => {
                     <div className="row g-0 align-items-center">
                         <div className="col-md-8 p-3">
                             <h5>Order #{order.id}</h5>
-                            <p className="mb-1"><strong>Date:</strong> {order.orderDate}</p>
-                            <p className="mb-1"><strong>Status:</strong> {order.status}</p>
-                            <p className="mb-1"><strong>Total:</strong> ${order.totalAmount}</p>
-                            <p className="mb-1">
-                                <strong>Shipping:</strong> {order.address}, {order.city}, {order.zipcode}
-                            </p>
+                            <p className="mb-1"><strong>Date: </strong> {order.orderDate}</p>
+                            <p className="mb-1"><strong>Status: </strong> {order.status}</p>
+                            <p className="mb-1"><strong>Total: </strong> ${order.totalAmount}</p>
+                            <p className="mb-1"><strong>Adress: </strong> {order.address}</p>
+                            <p className="mb-1"><strong>City: </strong> {order.city}</p>
+                            <p className="mb-1"><strong>Zipcode: </strong> {order.zipcode}</p>
                         </div>
 
                         <div className="col-md-4 text-end p-3">

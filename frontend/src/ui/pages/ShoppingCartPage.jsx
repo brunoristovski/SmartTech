@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import shoppingCartRepository from "../../repository/shoppingCartRepository";
 import "../../App.css"; // тука можеш да додадеш CSS за стилови
 
 const ShoppingCartPage = () => {
     const [shoppingCart, setShoppingCart] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     // Fetch shopping cart
     useEffect(() => {
@@ -101,7 +103,10 @@ const ShoppingCartPage = () => {
                         <h2>Shopping Cart Summary</h2>
                         <p><strong>Total Items:</strong> {shoppingCart?.shoppingCartItemDTOList?.length ?? 0}</p>
                         <p><strong>Total Amount:</strong> ${shoppingCart?.totalAmount?.toFixed(2) ?? 0}</p>
-                        <button className="btn btn-success w-100">
+                        <button
+                            className="btn btn-success w-100"
+                            onClick={() => navigate("/create-order")}
+                        >
                             Place Order
                         </button>
                     </div>
