@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import smart.tech.com.SmartTech.model.DTO.ProductDTO;
 import smart.tech.com.SmartTech.model.domain.Product;
+import smart.tech.com.SmartTech.model.enumerations.Category;
 import smart.tech.com.SmartTech.services.interfaces.ProductService;
 
 import java.util.List;
@@ -52,4 +53,13 @@ public class ProductRestController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = productService.getAllCategories();
+        if (categories.isEmpty()) {
+            return ResponseEntity.notFound().build(); // 404 ако нема категории
+        } else {
+            return ResponseEntity.ok(categories); // 200 OK со листата
+        }
+    }
 }

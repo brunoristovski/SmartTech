@@ -11,6 +11,7 @@ import ShoppingCartPage from "./ui/pages/ShoppingCartPage.jsx";
 import OrderItemsPage from "./ui/pages/OrderItemsPage.jsx";
 import OrdersPage from "./ui/pages/OrdersPage.jsx";
 import CreateOrderPage from "./ui/pages/CreateOrderPage.jsx";
+import CreateProductPage from "./ui/pages/CreateProductPage.jsx";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage/>} />
                     <Route path="/products" element={<ProductsPage />} />
+                    <Route path="/create-product" element={<CreateProductPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/editUser" element={<EditUserPage />} />

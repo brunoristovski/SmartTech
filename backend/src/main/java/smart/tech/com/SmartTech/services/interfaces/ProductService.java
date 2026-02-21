@@ -19,4 +19,6 @@ public interface ProductService {
 
     Optional<Product> deleteProduct(Long productId);
 
+    List<Category> getAllCategories();
+
 }

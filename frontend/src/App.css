@@ -78,5 +78,15 @@ html, body, #root {
   color: white;              /* текстот станува бел */
 }
 
+.btn-green-outline {
+  border: 2px solid #198754 !important; /* зелена граница */
+  color: #198754 !important;            /* зелена боја на текстот */
+  background-color: transparent !important; /* празно по default */
+  transition: all 0.3s ease;
+}
 
+.btn-green-outline:hover {
+  background-color: #198754 !important; /* полно зелено на hover */
+  color: white !important;              /* текстот станува бел */
+}
 

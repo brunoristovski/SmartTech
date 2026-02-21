@@ -16,6 +16,10 @@ const productRepository = {
     deleteProductById: async (id) => {
         return await axiosInstance.delete(`/products/admin/delete/${id}`);
     },
+    getAllCategories: () => {
+        return axiosInstance.get(`/products/categories`);
+    }
+
 };
 
 export default productRepository;

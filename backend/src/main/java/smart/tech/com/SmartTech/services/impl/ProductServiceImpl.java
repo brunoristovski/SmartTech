@@ -72,4 +72,10 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(product);
         return Optional.of(product);
     }
+
+    @Transactional
+    @Override
+    public List<Category> getAllCategories() {
+        return List.of(Category.values());
+    }
 }
