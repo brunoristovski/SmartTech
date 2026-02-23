@@ -21,7 +21,7 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/users")
 public class UserRestController {
 
@@ -93,8 +93,7 @@ public class UserRestController {
         verificationTokenRepository.delete(verificationToken);
 
         // Redirect на React login page
-        //response.sendRedirect("http://localhost:3000/login?verified=true");;
-        response.sendRedirect("https://smarttech-frontend.onrender.com/login?verified=true");
+        response.sendRedirect("http://localhost:3000/login?verified=true");;
     }
 
 }

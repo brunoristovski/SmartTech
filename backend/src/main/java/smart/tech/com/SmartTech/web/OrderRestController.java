@@ -14,7 +14,7 @@ import smart.tech.com.SmartTech.services.interfaces.OrderService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/orders")
 public class OrderRestController {
 

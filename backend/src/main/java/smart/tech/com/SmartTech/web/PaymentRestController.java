@@ -9,7 +9,7 @@ import smart.tech.com.SmartTech.services.impl.StripeService;
 import smart.tech.com.SmartTech.services.interfaces.OrderService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/payment")
 public class PaymentRestController {
 

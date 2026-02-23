@@ -33,7 +33,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "https://smarttech-frontend.onrender.com"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -50,11 +50,12 @@ public class WebSecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // Explicitly allow all OPTIONS for preflight
-                        .requestMatchers("/api/users/register/**").permitAll()
-                        .requestMatchers("/api/users/login/**").permitAll()
-                        .requestMatchers("/api/users/confirm/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/{id}", "/api/products/searchBy/categories").permitAll()
+                        .requestMatchers("/api/users/register",
+                                "/api/users/login/**",
+                                "/api/users/confirm/**",
+                                "/api/products",
+                                "/api/products/{id}",
+                                "/api/products/searchBy/categories").permitAll()
                         .requestMatchers(
                                 "/api/users/edit/**",
                                 "/api/shopping_cart/**",

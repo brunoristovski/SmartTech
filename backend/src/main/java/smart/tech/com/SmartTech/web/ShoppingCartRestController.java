@@ -15,8 +15,8 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @RestController
-//@CrossOrigin(origins = {"http://localhost:3000"})
-@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
+@RequestMapping("/api/shopping_cart")
 public class ShoppingCartRestController {
 
     private final UserService userService;

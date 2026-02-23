@@ -39,15 +39,6 @@ public class JwtFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
-        String requestPath = request.getServletPath();
-
-// Public endpoints – registration, login, confirm
-        if (requestPath.equals("/api/users/register") ||
-                requestPath.equals("/api/users/login") ||
-                requestPath.equals("/api/users/confirm")) {
-            filterChain.doFilter(request, response); // пропушти го JWT
-            return;
-        }
 
         String headerValue = request.getHeader("Authorization");
         if (headerValue == null || !headerValue.startsWith("Bearer ")) {

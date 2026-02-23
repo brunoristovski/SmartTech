@@ -1,7 +1,6 @@
 package smart.tech.com.SmartTech.services.impl;
 
-import com.stripe.model.tax.Registration;
-import org.springframework.mail.MailSender;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,16 +34,14 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final VerificationTokenRepository verificationTokenRepository;
-    private final GmailApiService gmailApiService;
 
-    public UserServiceImpl(UserRepository userRepository, ShoppingCartRepository shoppingCartRepository, MailService mailService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, VerificationTokenRepository verificationTokenRepository, GmailApiService gmailApiService) {
+    public UserServiceImpl(UserRepository userRepository, ShoppingCartRepository shoppingCartRepository, MailService mailService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, VerificationTokenRepository verificationTokenRepository) {
         this.userRepository = userRepository;
         this.shoppingCartRepository = shoppingCartRepository;
         this.mailService = mailService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
         this.verificationTokenRepository = verificationTokenRepository;
-        this.gmailApiService = gmailApiService;
     }
 
     @Override
@@ -96,11 +93,10 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         verificationTokenRepository.save(verificationToken);
 
 
-        //String link = "http://localhost:8080/api/users/confirm?token=" + token;
-        String link = "https://smarttech-backend-0xcq.onrender.com/api/users/confirm?token=" + token;
+        String link = "http://localhost:8080/api/users/confirm?token=" + token;
 
         try {
-            gmailApiService.sendEmail(
+            mailService.sendEmail(
                     user.getEmail(),
                     "SmartTech Account Verification",
                     "Click the link to verify your account: " + link

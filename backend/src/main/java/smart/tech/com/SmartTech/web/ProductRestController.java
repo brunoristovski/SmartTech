@@ -10,7 +10,7 @@ import smart.tech.com.SmartTech.services.interfaces.ProductService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/products")
 public class ProductRestController {
 
