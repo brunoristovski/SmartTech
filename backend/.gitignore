@@ -1,0 +1,50 @@
+# =========================
+# Project ignores
+# =========================
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# Keep compiled code in src/main/test target
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =========================
+# STS (Spring Tool Suite)
+# =========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+application-dev.properties
+.idea/
+
+# =========================
+# IDE Global ignores
+# =========================
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# =========================
+# NetBeans
+# =========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =========================
+# Sensitive files (DO NOT PUSH!)
+# =========================
+/backend/src/main/resources/credentials.json
+/tokens/
+.env
+.env.properties

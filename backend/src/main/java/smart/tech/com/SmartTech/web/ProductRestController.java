@@ -1,0 +1,81 @@
+package smart.tech.com.SmartTech.web;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import smart.tech.com.SmartTech.model.DTO.ProductDTO;
+import smart.tech.com.SmartTech.model.domain.Product;
+import smart.tech.com.SmartTech.model.enumerations.Category;
+import smart.tech.com.SmartTech.services.interfaces.ProductService;
+
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://smarttech-frontend.onrender.com"})
+@RequestMapping("/api/products")
+public class ProductRestController {
+
+    private final ProductService productService;
+
+    public ProductRestController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping()
+    public List<Product> listProducts() {
+        return productService.getProducts();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
+        return productService.getProduct(id)
+                .map(product -> ResponseEntity.ok().body(product))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/admin/create")
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+        return productService.createProduct(productDTO)
+                .map(product -> ResponseEntity.ok().body(product))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/admin/update/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        return productService.updateProduct(id,productDTO)
+                .map(product -> ResponseEntity.ok().body(product))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/admin/delete/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id) {
+        return productService.deleteProduct(id)
+                .map(product -> ResponseEntity.ok().body(product))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = productService.getAllCategories();
+        if (categories.isEmpty()) {
+            return ResponseEntity.notFound().build(); // 404 ако нема категории
+        } else {
+            return ResponseEntity.ok(categories); // 200 OK со листата
+        }
+    }
+
+    @GetMapping("/searchBy/categories")
+    public ResponseEntity<List<Product>> getAllProductsByCategory(@RequestParam String category) {
+        try {
+            // Пробај да конвертираш во enum, ако не успее, врати празна листа
+            Category categoryEnum = Category.valueOf(category.toUpperCase());
+            List<Product> products = productService.getAllProductsByCategory(categoryEnum);
+
+            // Врати празна листа наместо 404 ако нема продукти
+            return ResponseEntity.ok(products);
+
+        } catch (IllegalArgumentException e) {
+            // Ако category не постои во enum
+            return ResponseEntity.ok(List.of());
+        }
+    }
+}
