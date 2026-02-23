@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
 
 
         //String link = "http://localhost:8080/api/users/confirm?token=" + token;
-        String link = "https://smarttech-9ot8.onrender.com/api/users/confirm?token=" + token;
+        String link = "https://smarttech-backend-0xcq.onrender.com/api/users/confirm?token=" + token;
 
         try {
             gmailApiService.sendEmail(
